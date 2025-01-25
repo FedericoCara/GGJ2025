@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Platformer
+namespace Bubble
 {
     public class PlayerController : MonoBehaviour
     {
@@ -19,13 +19,11 @@ namespace Platformer
 
         private Rigidbody2D rigidbody;
         private Animator animator;
-        private GameManager gameManager;
 
         void Start()
         {
             rigidbody = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
-            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         }
 
         private void FixedUpdate()
@@ -92,8 +90,6 @@ namespace Platformer
         {
             if (other.gameObject.tag == "Coin")
             {
-                if(gameManager!=null)
-                    gameManager.coinsCounter += 1;
                 Destroy(other.gameObject);
             }
         }
