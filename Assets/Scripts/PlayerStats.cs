@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     public float damage = 10f;
     private bool isDead = false;
 
-    public float oxigin = 100f;
+    public int oxigin = 100;
 
     public float health = 100f;
 

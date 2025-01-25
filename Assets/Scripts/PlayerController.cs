@@ -13,11 +13,11 @@ using UnityEngine.UI;
 
         public Image barraDeoxigeno;
 
-        public float oxigeno;
         public float movingSpeed;
         public float jumpForce;
         public int dashForce;
         public float dashingStopSpeed = 0.2f;
+        public int dashCost = 10;
         private float moveInput;
 
         private Inputs inputs;
@@ -69,13 +69,8 @@ using UnityEngine.UI;
 
         void Update()
         {
-            oxigeno = playerstats.oxigin;
-
-            if (IsDashingButtonDown() && !_dashing && oxigeno>=30)
+            if (IsDashingButtonDown() && CanDash())
             {
-                playerstats.oxigin = oxigeno - 30;
-                if(barraDeoxigeno!=null)
-                    barraDeoxigeno.fillAmount -= 0.3f;
 
                 StartDash();
             }
@@ -122,6 +117,8 @@ using UnityEngine.UI;
             LimitVerticalSpeed();
         }
 
+        private bool CanDash() => !_dashing && playerstats.oxigin >= dashCost;
+
         private bool CanFire()
         {
             return _fire.IsPressed() && !_firing && _fireWaitingTime <= 0;
@@ -162,6 +159,9 @@ using UnityEngine.UI;
         {
             rigidbody.AddForce(new Vector2((facingRight ? 1 : -1) * dashForce, 0), ForceMode2D.Impulse);
             rigidbody.drag = dashingDrag;
+            playerstats.oxigin = playerstats.oxigin - dashCost;
+            if(barraDeoxigeno!=null)
+                barraDeoxigeno.fillAmount -= dashCost/100f;
             _dashing = true;
         }
 
@@ -226,7 +226,8 @@ using UnityEngine.UI;
         {
             if (other.gameObject.tag == "Bubble")
             {
-                oxigeno++;
+                var lootBubble = other.GetComponentInParent<LootBubble>();
+                playerstats.oxigin += lootBubble.oxigenProvided;
                 Destroy(other.gameObject);
             }
         }
