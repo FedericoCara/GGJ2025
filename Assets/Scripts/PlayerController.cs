@@ -227,6 +227,7 @@ using UnityEngine.UI;
             if (other.gameObject.tag == "Bubble")
             {
                 oxigeno++;
+                Destroy(other.gameObject);
             }
         }
     }
