@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Bubble
 {
@@ -9,6 +10,8 @@ namespace Bubble
         public float movingSpeed;
         public float jumpForce;
         private float moveInput;
+        
+        private Inputs inputs;
 
         private bool facingRight = false;
         [HideInInspector]
@@ -20,11 +23,18 @@ namespace Bubble
 
         private Rigidbody2D rigidbody;
         private Animator animator;
+        private InputAction _move;
+        private InputAction _jump;
 
         void Start()
         {
             rigidbody = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            inputs = new Inputs();
+            _move = inputs.Player.Move;
+            _move.Enable();
+            _jump = inputs.Player.Jump;
+            _jump.Enable();
         }
 
         private void FixedUpdate()
@@ -34,9 +44,9 @@ namespace Bubble
 
         void Update()
         {
-            if (Input.GetButton("Horizontal")) 
+            if (_move.IsPressed())
             {
-                moveInput = Input.GetAxis("Horizontal");
+                moveInput = _move.ReadValue<Vector2>().x;;
                 Vector3 direction = transform.right * moveInput;
                 transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, movingSpeed * Time.deltaTime);
                 animator.SetInteger("playerState", 1); // Turn on run animation
@@ -45,17 +55,13 @@ namespace Bubble
             {
                 if (isGrounded) animator.SetInteger("playerState", 0); // Turn on idle animation
             }
-            if(Input.GetKeyDown(KeyCode.Space) && isGrounded )
+            if(_jump.triggered && isGrounded )
             {
                 rigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             }
             if (!isGrounded)animator.SetInteger("playerState", 2); // Turn on jump animation
 
-            if(facingRight == false && moveInput > 0)
-            {
-                Flip();
-            }
-            else if(facingRight == true && moveInput < 0)
+            if(!facingRight && moveInput > 0 || facingRight && moveInput<0)
             {
                 Flip();
             }
