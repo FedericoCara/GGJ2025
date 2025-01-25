@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +9,8 @@ namespace Bubble
     {
         public float movingSpeed;
         public float jumpForce;
+        public int dashForce;
+        public float dashingStopSpeed = 0.2f;
         private float moveInput;
         
         private Inputs inputs;
@@ -20,11 +22,15 @@ namespace Bubble
         private bool isGrounded;
         public Transform groundCheck;
         public float fallingGravity = 0.5f;
+        public float dashingDrag = 5;
+        public Vector2 verticalSpeedLimits = new Vector2(-10, 10);
 
         private Rigidbody2D rigidbody;
         private Animator animator;
         private InputAction _move;
         private InputAction _jump;
+        private InputAction _dash;
+        private bool _dashing;
 
         void Start()
         {
@@ -35,6 +41,8 @@ namespace Bubble
             _move.Enable();
             _jump = inputs.Player.Jump;
             _jump.Enable();
+            _dash = inputs.Player.Dash;
+            _dash.Enable();
         }
 
         private void FixedUpdate()
@@ -44,12 +52,29 @@ namespace Bubble
 
         void Update()
         {
+            if (IsDashingButtonDown() && !_dashing)
+            {
+                StartDash();
+            }
+
+            if (CheckDashingFinished())
+            {
+                _dashing = false;
+                rigidbody.drag = 0;
+            }
+
             if (_move.IsPressed())
             {
                 moveInput = _move.ReadValue<Vector2>().x;;
-                Vector3 direction = transform.right * moveInput;
-                transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, movingSpeed * Time.deltaTime);
-                animator.SetInteger("playerState", 1); // Turn on run animation
+                if (_dashing && MovingOppositeDirection(moveInput))
+                {
+                    CancelDash();
+                }else if (!_dashing || IsDashingFinishing())
+                {
+                    var direction = transform.right * moveInput;
+                    transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, movingSpeed * Time.deltaTime);
+                    animator.SetInteger("playerState", 1); // Turn on run animation
+                }
             }
             else
             {
@@ -65,8 +90,52 @@ namespace Bubble
             {
                 Flip();
             }
-
+            
             rigidbody.gravityScale = rigidbody.velocity.y < 0 ? fallingGravity : 1;
+            LimitVerticalSpeed();
+        }
+
+        private bool IsDashingFinishing()
+        {
+            return _dashing && Mathf.Abs(rigidbody.velocity.x) <= dashingStopSpeed;
+        }
+
+        private void StartDash()
+        {
+            rigidbody.AddForce(new Vector2((facingRight ? 1 : -1) * dashForce, 0), ForceMode2D.Impulse);
+            rigidbody.drag = dashingDrag;
+            _dashing = true;
+        }
+
+        private void CancelDash()
+        {
+            _dashing = false;
+            rigidbody.velocity = StopXMovement();
+            rigidbody.drag = 0;
+        }
+
+        private Vector2 StopXMovement() => new Vector2(0, rigidbody.velocity.y);
+
+        private bool MovingOppositeDirection(float direction)
+        {
+            return rigidbody.velocity.x > 0 && direction < 0 ||
+                   rigidbody.velocity.x < 0 && direction > 0;
+        }
+
+        private bool CheckDashingFinished()
+        {
+            return !_dashing || IsDashingFinishing();
+        }
+
+        private bool IsDashingButtonDown()
+        {
+            return _dash.triggered;
+        }
+
+        private void LimitVerticalSpeed()
+        {
+            rigidbody.velocity = new Vector2(rigidbody.velocity.x,
+                Mathf.Clamp(rigidbody.velocity.y, verticalSpeedLimits.x,verticalSpeedLimits.y));
         }
 
         private void Flip()
