@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Bubble
 {
     public class PlayerController : MonoBehaviour
     {
+        public PlayerStats playerstats;
+
+        public Image barraDeoxigeno;
+
+        public float oxigeno;
         public float movingSpeed;
         public float jumpForce;
         public int dashForce;
@@ -52,8 +58,13 @@ namespace Bubble
 
         void Update()
         {
-            if (IsDashingButtonDown() && !_dashing)
+            oxigeno = playerstats.oxigin;
+
+            if (IsDashingButtonDown() && !_dashing && oxigeno>=30)
             {
+                playerstats.oxigin = oxigeno - 30;
+                barraDeoxigeno.fillAmount -= 0.3f;
+
                 StartDash();
             }
 

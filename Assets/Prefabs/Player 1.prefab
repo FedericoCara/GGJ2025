@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6952628394585513800}
   - component: {fileID: 1790037090246208845}
   - component: {fileID: 4654829721311286726}
+  - component: {fileID: 5319963327695070743}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -195,6 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69adebefe15d4efe9c8b6b3b37724337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerstats: {fileID: 5319963327695070743}
+  barraDeoxigeno: {fileID: 0}
+  oxigeno: 0
   movingSpeed: 6
   jumpForce: 4
   dashForce: 30
@@ -234,6 +238,22 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5319963327695070743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6952628394585513906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b602dd13fae0fdd46973ac18384333aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 100
+  damage: 10
+  oxigin: 100
+  health: 100
 --- !u!1 &6952628394686255623
 GameObject:
   m_ObjectHideFlags: 0
