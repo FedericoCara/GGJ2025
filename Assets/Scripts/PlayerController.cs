@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+    using UnityEngine.Serialization;
 
-namespace Bubble
+    namespace BubbleNS
 {
     public class PlayerController : MonoBehaviour
     {
@@ -12,25 +13,33 @@ namespace Bubble
         public int dashForce;
         public float dashingStopSpeed = 0.2f;
         private float moveInput;
-        
+
         private Inputs inputs;
 
         private bool facingRight = false;
+
         [HideInInspector]
         public bool deathState = false;
+
 
         private bool isGrounded;
         public Transform groundCheck;
         public float fallingGravity = 0.5f;
         public float dashingDrag = 5;
+        public float firingDelay = 3;
         public Vector2 verticalSpeedLimits = new Vector2(-10, 10);
+        public Bubble bubble;
+        public Transform bubbleSpawnPosition;
 
         private Rigidbody2D rigidbody;
         private Animator animator;
         private InputAction _move;
         private InputAction _jump;
         private InputAction _dash;
+        private InputAction _fire;
         private bool _dashing;
+        private bool _firing;
+        private float _fireWaitingTime;
 
         void Start()
         {
@@ -43,6 +52,8 @@ namespace Bubble
             _jump.Enable();
             _dash = inputs.Player.Dash;
             _dash.Enable();
+            _fire = inputs.Player.Fire;
+            _fire.Enable();
         }
 
         private void FixedUpdate()
@@ -62,8 +73,12 @@ namespace Bubble
                 _dashing = false;
                 rigidbody.drag = 0;
             }
+            CheckFiringDelay();
 
-            if (_move.IsPressed())
+            if (!_dashing && CanFire())
+            {
+                FireBubbles();
+            } else if (_move.IsPressed())
             {
                 moveInput = _move.ReadValue<Vector2>().x;;
                 if (_dashing && MovingOppositeDirection(moveInput))
@@ -95,6 +110,37 @@ namespace Bubble
             LimitVerticalSpeed();
         }
 
+        private bool CanFire()
+        {
+            return _fire.IsPressed() && !_firing && _fireWaitingTime <= 0;
+        }
+
+        private void CheckFiringDelay()
+        {
+            if (_firing)
+            {
+                _fireWaitingTime -= Time.deltaTime;
+                if (_fireWaitingTime <= 0)
+                {
+                    _fireWaitingTime = 0;
+                    _firing = false;
+                }
+            }
+        }
+
+        private void FireBubbles()
+        {
+            _firing = true;
+            _fireWaitingTime = firingDelay;
+            SpawnBubbles();
+        }
+
+        private void SpawnBubbles()
+        {
+            var bubbleSpawned = Instantiate(bubble, bubbleSpawnPosition.position, Quaternion.identity);
+            bubbleSpawned.Initialize(facingRight);
+        }
+
         private bool IsDashingFinishing()
         {
             return _dashing && Mathf.Abs(rigidbody.velocity.x) <= dashingStopSpeed;
@@ -114,7 +160,7 @@ namespace Bubble
             rigidbody.drag = 0;
         }
 
-        private Vector2 StopXMovement() => new Vector2(0, rigidbody.velocity.y);
+        private Vector2 StopXMovement() => new(0, rigidbody.velocity.y);
 
         private bool MovingOppositeDirection(float direction)
         {
