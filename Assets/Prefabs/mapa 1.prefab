@@ -3985,7 +3985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5425746231037310283}
   - component: {fileID: 9073367434510650755}
-  - component: {fileID: 2672917443673834291}
+  - component: {fileID: 577312191433272897}
   m_Layer: 0
   m_Name: Triangle (1)
   m_TagString: Untagged
@@ -4060,8 +4060,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2672917443673834291
-BoxCollider2D:
+--- !u!60 &577312191433272897
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4092,7 +4092,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.28866667}
@@ -4102,9 +4102,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.5773587}
+      - {x: -0.5, y: -0.28866667}
+      - {x: 0.5, y: -0.28866667}
+  m_UseDelaunayMesh: 0
 --- !u!1 &4536405389093253848
 GameObject:
   m_ObjectHideFlags: 0
@@ -6272,7 +6275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2989565933972614122}
   - component: {fileID: 671262541757005408}
-  - component: {fileID: 1355530648209959409}
+  - component: {fileID: 6773683733745721232}
   m_Layer: 0
   m_Name: 9-Sliced
   m_TagString: Untagged
@@ -6347,7 +6350,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1355530648209959409
+--- !u!61 &6773683733745721232
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6379,7 +6382,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.01224485}
   m_SpriteTilingProperty:
     border: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
     pivot: {x: 0.5, y: 0.5}
@@ -6390,7 +6393,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.7224497}
   m_EdgeRadius: 0
 --- !u!1 &6743219127182794853
 GameObject:
