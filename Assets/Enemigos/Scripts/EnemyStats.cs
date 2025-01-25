@@ -10,11 +10,6 @@ public class EnemyStats : MonoBehaviour
 
     private bool isDead = false;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         // Verificar si la vida del enemigo es menor o igual a 0

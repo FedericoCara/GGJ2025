@@ -8,7 +8,7 @@ namespace BubbleNS
         private Rigidbody2D _rigidBody;
         public float basicForce = 1;
         public float mediumForce = 5;
-        public float maxForce = 50;
+        public int damage = 1;
 
         private void Awake()
         {
@@ -32,12 +32,18 @@ namespace BubbleNS
             {
                 return basicForce;
             }
-            if (intensity == 1)
-            {
-                return mediumForce;
-            }
+            
+            return mediumForce;
+        }
 
-            return maxForce;
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            EnemyStats enemy;
+            if((enemy = col.otherCollider.GetComponentInChildren<EnemyStats>())!=null){
+                enemy.TakeDamage(damage);
+            }
+            Destroy(gameObject);
+            
         }
     }
 }
