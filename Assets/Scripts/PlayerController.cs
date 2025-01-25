@@ -16,6 +16,7 @@ namespace Bubble
 
         private bool isGrounded;
         public Transform groundCheck;
+        public float fallingGravity = 0.5f;
 
         private Rigidbody2D rigidbody;
         private Animator animator;
@@ -58,6 +59,8 @@ namespace Bubble
             {
                 Flip();
             }
+
+            rigidbody.gravityScale = rigidbody.velocity.y < 0 ? fallingGravity : 1;
         }
 
         private void Flip()
