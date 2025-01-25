@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BubbleNS
 {
-    public class Bubble : MonoBehaviour
+    public class FireBubble : MonoBehaviour
     {
         private Rigidbody2D _rigidBody;
         public float basicForce = 1;

@@ -34,7 +34,7 @@ using UnityEngine.UI;
         public float dashingDrag = 5;
         public float firingDelay = 3;
         public Vector2 verticalSpeedLimits = new Vector2(-10, 10);
-        public Bubble bubble;
+        [FormerlySerializedAs("bubble")] public FireBubble fireBubble;
         public Transform bubbleSpawnPosition;
 
         private Rigidbody2D rigidbody;
@@ -74,7 +74,8 @@ using UnityEngine.UI;
             if (IsDashingButtonDown() && !_dashing && oxigeno>=30)
             {
                 playerstats.oxigin = oxigeno - 30;
-                barraDeoxigeno.fillAmount -= 0.3f;
+                if(barraDeoxigeno!=null)
+                    barraDeoxigeno.fillAmount -= 0.3f;
 
                 StartDash();
             }
@@ -148,7 +149,7 @@ using UnityEngine.UI;
 
         private void SpawnBubbles()
         {
-            var bubbleSpawned = Instantiate(bubble, bubbleSpawnPosition.position, Quaternion.identity);
+            var bubbleSpawned = Instantiate(fireBubble, bubbleSpawnPosition.position, Quaternion.identity);
             bubbleSpawned.Initialize(facingRight);
         }
 
@@ -223,9 +224,9 @@ using UnityEngine.UI;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Coin")
+            if (other.gameObject.tag == "Bubble")
             {
-                Destroy(other.gameObject);
+                oxigeno++;
             }
         }
     }
