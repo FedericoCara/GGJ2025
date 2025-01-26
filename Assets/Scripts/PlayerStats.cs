@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private float health = 100f;
 
+    public int keys;
+
     public float Health => health;
 
     public void TakeDamage(float enemyDamage)

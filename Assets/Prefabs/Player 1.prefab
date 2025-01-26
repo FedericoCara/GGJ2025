@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 1790037090246208845}
   - component: {fileID: 4654829721311286726}
   - component: {fileID: 5319963327695070743}
+  - component: {fileID: 1867929972070704910}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -304,6 +305,19 @@ MonoBehaviour:
   - {fileID: -1956501840, guid: 4e35d43243133f14b868434da90017cd, type: 3}
   casco: {fileID: 0}
   health: 100
+  keys: 0
+--- !u!114 &1867929972070704910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6952628394585513906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f0b8495a6dc49bd9f12f8dd22c5093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6952628394686255623
 GameObject:
   m_ObjectHideFlags: 0
