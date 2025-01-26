@@ -248,9 +248,15 @@ MonoBehaviour:
   groundCheck: {fileID: 6952628394686255622}
   fallingGravity: 0.5
   dashingDrag: 5
-  firingDelay: 0.5
+  firingDelayPerIntensity:
+  - 0.5
+  - 0.25
   verticalSpeedLimits: {x: -10, y: 10}
-  fireBubble: {fileID: 2262546804791301443, guid: 4792dec72cd5843c18ef61c7b2224df6, type: 3}
+  fireBubbles:
+  - {fileID: 2262546804791301443, guid: 4792dec72cd5843c18ef61c7b2224df6, type: 3}
+  - {fileID: 3790077385874342776, guid: 56028d508b9d54d28add3d83a0141565, type: 3}
+  - {fileID: 2135435027026188145, guid: fd24f9a9162c54fd4911a8a3cdaf3241, type: 3}
+  - {fileID: 8939951190243689185, guid: 9338ccdba11314e3e8842d63a2574f02, type: 3}
   bubbleSpawnPosition: {fileID: 3102651286667650363}
 --- !u!114 &4654829721311286726
 MonoBehaviour:

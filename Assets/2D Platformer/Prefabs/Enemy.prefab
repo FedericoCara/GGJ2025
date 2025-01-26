@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7873588928898685948}
   - component: {fileID: 2367412024886369351}
   - component: {fileID: 247841306613023521}
+  - component: {fileID: 5912202983338897552}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -298,3 +299,17 @@ MonoBehaviour:
   enemySprite: {fileID: 7873588928898685951}
   bubbledSprite: {fileID: 143911395689561402}
   bubbledConfig: {fileID: 11400000, guid: a19acd06af33e418cbb83daa647b877c, type: 2}
+--- !u!114 &5912202983338897552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7873588928898685938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2fc74885b04d779bad4502333f1b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStats: {fileID: 247841306613023521}
+  lootBubble: {fileID: 3279383299882419009, guid: ccc87a2d52152488ab7676ef98e65bc4, type: 3}
