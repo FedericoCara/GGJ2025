@@ -115,7 +115,7 @@ namespace BubbleNS
             }
             else
             {
-                if (isGrounded) animator.SetInteger("playerState", 0); // Turn on idle animation
+                if (isGrounded || Mathf.Abs(rigidbody.velocity.y) > 0) animator.SetInteger("playerState", 0); // Turn on idle animation
             }
             if(_jump.triggered && isGrounded )
             {
@@ -157,7 +157,7 @@ namespace BubbleNS
 
             _firing = true;
             _fireWaitingTime = firingDelayPerIntensity[CalcIntensity()];
-            SpawnBubbles();
+            animator.SetInteger("playerState", 5);
 
             playerstats.ModifyOxygen(-fireCost);
             
@@ -166,10 +166,10 @@ namespace BubbleNS
         }
 
         private int _bubbleIndex;
-        private void SpawnBubbles()
+        public void SpawnBubbles()
         {
             var bubbleSpawned = Instantiate(GetNextBubble(), bubbleSpawnPosition.position, Quaternion.identity);
-            bubbleSpawned.Initialize(facingRight, CalcIntensity());
+            bubbleSpawned.Initialize(!facingRight, CalcIntensity());
         }
 
         private FireBubble GetNextBubble()
