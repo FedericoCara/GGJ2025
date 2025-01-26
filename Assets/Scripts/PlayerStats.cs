@@ -7,25 +7,21 @@ public class PlayerStats : MonoBehaviour
     public float life = 100f;
 
     public float damage = 10f;
-    private bool isDead = false;
+    public bool IsDead { get; private set; }
 
     public int oxigin = 100;
 
-    public float health = 100f;
+    [SerializeField]
+    private float health = 100f;
 
+    public float Health => health;
 
-    void Start()
+    public void TakeDamage(float enemyDamage)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-         if (health <= 0f && !isDead)
+        health -= enemyDamage;
+        if (health <= 0f && !IsDead)
         {
-            isDead = true;
+            IsDead = true;
         }
-        
     }
 }

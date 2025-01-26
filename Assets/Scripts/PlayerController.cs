@@ -1,3 +1,4 @@
+    using System;
     using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ using UnityEngine.UI;
         public int dashForce;
         public float dashingStopSpeed = 0.2f;
         public int dashCost = 10;
+        public int damageForce = 5;
+        public float receiveDamageDuration = 0.5f;
         private float moveInput;
 
         private Inputs inputs;
@@ -46,6 +49,7 @@ using UnityEngine.UI;
         private bool _dashing;
         private bool _firing;
         private float _fireWaitingTime;
+        private float _receivingDamageDurationLeft;
 
         void Start()
         {
@@ -62,6 +66,11 @@ using UnityEngine.UI;
             _fire.Enable();
         }
 
+        private void OnDestroy()
+        {
+            inputs.Disable();
+        }
+
         private void FixedUpdate()
         {
             CheckGround();
@@ -69,6 +78,12 @@ using UnityEngine.UI;
 
         void Update()
         {
+            if (_receivingDamageDurationLeft>0)
+            {
+                _receivingDamageDurationLeft -= Time.deltaTime;
+                return;
+            }
+            
             if (IsDashingButtonDown() && CanDash())
             {
 
@@ -214,11 +229,22 @@ using UnityEngine.UI;
         {
             if (other.gameObject.tag == "Enemy")
             {
-                deathState = true; // Say to GameManager that player is dead
-            }
-            else
-            {
-                deathState = false;
+                var enemy = other.gameObject.GetComponent<EnemyStats>();
+                playerstats.TakeDamage(enemy.damage);
+                deathState = playerstats.IsDead;
+                if (!deathState)
+                {
+                    _receivingDamageDurationLeft = receiveDamageDuration;
+                    var directionFromEnemy = (transform.position - other.transform.position);
+                    directionFromEnemy = new Vector3(directionFromEnemy.x, 3);
+                    directionFromEnemy.Normalize();
+                    rigidbody.AddForce(directionFromEnemy*damageForce, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                    GameManager.Instance.RestartLevel();
+                }
             }
         }
 
