@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f9f706f8d2147e19b963752120e225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayScene: PlayerTest
+  gameplayScene: Onboarding
 --- !u!114 &1634145455
 MonoBehaviour:
   m_ObjectHideFlags: 0
