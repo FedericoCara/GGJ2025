@@ -18,8 +18,6 @@ namespace BubbleNS
         public int dashCost = 10;
 
         public int fireCost = 5;
-        public int damageForce = 5;
-        public float receiveDamageDuration = 0.5f;
         private float moveInput;
 
         private Inputs inputs;
@@ -80,7 +78,10 @@ namespace BubbleNS
             if (_receivingDamageDurationLeft>0)
             {
                 _receivingDamageDurationLeft -= Time.deltaTime;
-                return;
+                if (_receivingDamageDurationLeft >= 0)
+                    return;
+                else
+                    rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
             }
             
             if (IsDashingButtonDown() && CanDash())
@@ -249,14 +250,19 @@ namespace BubbleNS
                 if(enemy.IsBubbled)
                     return;
                 playerstats.TakeDamage(enemy.damage);
+                if (enemy.selfDestroyOnImpact)
+                {
+                    enemy.SelfDestroy();
+                }
+
                 deathState = playerstats.IsDead;
                 if (!deathState)
                 {
-                    _receivingDamageDurationLeft = receiveDamageDuration;
+                    _receivingDamageDurationLeft = enemy.receiveDamageDuration;
                     var directionFromEnemy = (transform.position - other.transform.position);
                     directionFromEnemy = new Vector3(directionFromEnemy.x, 3);
                     directionFromEnemy.Normalize();
-                    rigidbody.AddForce(directionFromEnemy*damageForce, ForceMode2D.Impulse);
+                    rigidbody.AddForce(directionFromEnemy*enemy.damageForce, ForceMode2D.Impulse);
                 }
                 else
                 {

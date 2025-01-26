@@ -164,6 +164,9 @@ MonoBehaviour:
   health: 1
   damage: 10
   destructionDelay: 0
+  damageForce: 0.1
+  receiveDamageDuration: 0.1
+  selfDestroyOnImpact: 1
   enemySprite: {fileID: 5082802421832894731}
   bubbledSprite: {fileID: 0}
   bubbledConfig: {fileID: 11400000, guid: a19acd06af33e418cbb83daa647b877c, type: 2}
