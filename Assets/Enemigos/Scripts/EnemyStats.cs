@@ -19,11 +19,13 @@ public class EnemyStats : MonoBehaviour
     private Animator _animator;
     private float _maxHealth;
     private float _timeToDissappearLeft;
+    private EnemyShooter _enemyShooter;
 
     private void Awake()
     {
         _collider2D = GetComponent<Collider2D>();
         _animator = GetComponentInParent<Animator>();
+        _enemyShooter = GetComponent<EnemyShooter>();
         _maxHealth = health;
     }
 
@@ -71,7 +73,10 @@ public class EnemyStats : MonoBehaviour
             
         bubbledSprite.color = new Color(1, 1, 1,alpha);
         
-        _animator.enabled = maxHealthPercentage>=1;
+        if(_animator != null)
+            _animator.enabled = maxHealthPercentage>=1;
+        if (_enemyShooter != null)
+            _enemyShooter.enabled = maxHealthPercentage >= 1;
     }
 
     public bool IsMaxHealth()
