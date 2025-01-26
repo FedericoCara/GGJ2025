@@ -34,7 +34,9 @@ public class EnemyStats : MonoBehaviour
         if (isDead)
         {
             _timeToDissappearLeft -= Time.deltaTime;
-            bubbledSprite.color = new Color(1, 1, 1, _timeToDissappearLeft/bubbledConfig.timeToDissappear);
+            if(bubbledSprite != null)
+                bubbledSprite.color = new Color(1, 1, 1, _timeToDissappearLeft/bubbledConfig.timeToDissappear);
+
             if(_timeToDissappearLeft<=0)
                 Destroy(gameObject);
             return;
@@ -71,6 +73,7 @@ public class EnemyStats : MonoBehaviour
             maxHealthPercentage > 0f ? bubbledConfig.alphas[3] :
             bubbledConfig.alphas[4];
             
+        if (bubbledSprite != null)
         bubbledSprite.color = new Color(1, 1, 1,alpha);
         
         if(_animator != null)
