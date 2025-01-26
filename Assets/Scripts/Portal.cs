@@ -16,11 +16,11 @@ public class Portal : MonoBehaviour
         keysRequiredTxt.text = keysRequired.ToString();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (other.tag == "Player")
+        if (col.tag == "Player")
         {
-            var player = other.GetComponent<PlayerStats>();
+            var player = col.GetComponent<PlayerStats>();
             if (player.keys >= keysRequired)
             {
                 player.transform.position = portalConnected.exitPoint.position;
