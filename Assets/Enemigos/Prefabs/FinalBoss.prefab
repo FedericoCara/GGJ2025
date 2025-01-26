@@ -430,7 +430,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileLifetime: 3
   offset: 0
-  direction: {x: 1, y: 1}
+  direction: {x: -1, y: 1}
 --- !u!114 &6894640236950038799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +446,9 @@ MonoBehaviour:
   health: 500
   damage: 35
   destructionDelay: 0.5
+  damageForce: 5
+  receiveDamageDuration: 0.8
+  selfDestroyOnImpact: 0
   enemySprite: {fileID: 1060025797816351446}
   bubbledSprite: {fileID: 2011845866347924377}
   bubbledConfig: {fileID: 11400000, guid: a19acd06af33e418cbb83daa647b877c, type: 2}
@@ -467,7 +470,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileLifetime: 3
   offset: 0
-  direction: {x: -1, y: 1}
+  direction: {x: -1, y: -1}
 --- !u!114 &3252148095760072990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,7 +489,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileLifetime: 3
   offset: 1
-  direction: {x: 0, y: 1}
+  direction: {x: -1, y: 0}
 --- !u!114 &7255588516845564756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +508,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileLifetime: 3
   offset: 2
-  direction: {x: 1, y: 0}
+  direction: {x: 0, y: 1}
 --- !u!114 &2101573623735685506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,7 +527,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileLifetime: 3
   offset: 2
-  direction: {x: -1, y: 0}
+  direction: {x: 0, y: -1}
 --- !u!114 &1986755048393420841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +546,7 @@ MonoBehaviour:
   projectileSpeed: 5
   projectileLifetime: 3
   offset: 2
-  direction: {x: 0, y: 1}
+  direction: {x: -1, y: 0}
 --- !u!1 &7974507011388304100
 GameObject:
   m_ObjectHideFlags: 0
