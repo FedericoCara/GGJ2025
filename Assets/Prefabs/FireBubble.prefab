@@ -163,4 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicForce: 5
   mediumForce: 20
-  damage: 1
+  damage: 30

@@ -62,6 +62,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 26901776534425233}
     m_Modifications:
+    - target: {fileID: 143911395689561402, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 367372081732775679, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.4339821
+      objectReference: {fileID: 0}
+    - target: {fileID: 367372081732775679, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.4278252
+      objectReference: {fileID: 0}
+    - target: {fileID: 367372081732775679, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 367372081732775679, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.138
+      objectReference: {fileID: 0}
     - target: {fileID: 1449881804780183223, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
       propertyPath: m_Controller
       value: 
@@ -151,9 +171,6 @@ PrefabInstance:
       addedObject: {fileID: 6171597595292335549}
     - targetCorrespondingSourceObject: {fileID: 7873588928898685938, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4123997863209236455}
-    - targetCorrespondingSourceObject: {fileID: 7873588928898685938, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3276584948405808861}
   m_SourcePrefab: {fileID: 100100000, guid: 23035e71af28fbb46a389ba66a0a5430, type: 3}
 --- !u!4 &5193625251916009058 stripped
@@ -187,21 +204,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4123997863209236455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5193625251916009064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2a3184f027eec74785b560c167d31e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  damage: 10
-  destructionDelay: 0.5
 --- !u!70 &3276584948405808861
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
