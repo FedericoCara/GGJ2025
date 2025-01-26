@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 5117592156259763599}
   - component: {fileID: 2369759783002970004}
   - component: {fileID: 6894640236950038799}
+  - component: {fileID: 2831564753314669362}
   m_Layer: 0
   m_Name: Enemigo3
   m_TagString: Untagged
@@ -343,3 +344,17 @@ MonoBehaviour:
   enemySprite: {fileID: 1060025797816351446}
   bubbledSprite: {fileID: 2011845866347924377}
   bubbledConfig: {fileID: 11400000, guid: a19acd06af33e418cbb83daa647b877c, type: 2}
+--- !u!114 &2831564753314669362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093214141935936419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2fc74885b04d779bad4502333f1b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStats: {fileID: 6894640236950038799}
+  lootBubble: {fileID: 3279383299882419009, guid: ccc87a2d52152488ab7676ef98e65bc4, type: 3}

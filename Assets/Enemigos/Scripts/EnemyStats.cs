@@ -13,6 +13,7 @@ public class EnemyStats : MonoBehaviour
     public SpriteRenderer enemySprite;
     public SpriteRenderer bubbledSprite;
     public BubbledConfiguration bubbledConfig;
+    public event Action OnDead;
 
     private bool isDead;
     private Collider2D _collider2D;
@@ -59,9 +60,11 @@ public class EnemyStats : MonoBehaviour
                 _collider2D.enabled = false;
                 _timeToDissappearLeft = bubbledConfig.timeToDissappear;
                 enemySprite.enabled = false;
+                OnDead?.Invoke();
             }
         }
     }
+
 
     private void UpdateBubbled()
     {
@@ -86,5 +89,7 @@ public class EnemyStats : MonoBehaviour
     {
         return health >= _maxHealth;
     }
+
+    public bool IsBubbled => health / _maxHealth < 1;
 }
 

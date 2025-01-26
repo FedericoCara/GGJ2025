@@ -240,6 +240,8 @@ using UnityEngine.UI;
             if (other.gameObject.tag == "Enemy")
             {
                 var enemy = other.gameObject.GetComponent<EnemyStats>();
+                if(enemy.IsBubbled)
+                    return;
                 playerstats.TakeDamage(enemy.damage);
                 deathState = playerstats.IsDead;
                 if (!deathState)
