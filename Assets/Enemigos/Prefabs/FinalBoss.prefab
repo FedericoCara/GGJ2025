@@ -433,7 +433,7 @@ MonoBehaviour:
   enemySprite: {fileID: 1060025797816351446}
   bubbledSprite: {fileID: 2011845866347924377}
   bubbledConfig: {fileID: 11400000, guid: a19acd06af33e418cbb83daa647b877c, type: 2}
-  isTheBoss: 0
+  isTheBoss: 1
 --- !u!114 &2369759783002970004
 MonoBehaviour:
   m_ObjectHideFlags: 0

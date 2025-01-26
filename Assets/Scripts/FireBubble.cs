@@ -9,7 +9,7 @@ namespace BubbleNS
         public float basicForce = 1;
         public float mediumForce = 5;
         public int damage = 1;
-
+        
         private void Awake()
         {
             _rigidBody = GetComponent<Rigidbody2D>();
