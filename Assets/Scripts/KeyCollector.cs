@@ -14,9 +14,9 @@ public class KeyCollector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Key")
+        if (col.CompareTag("Key"))
         {
-            _playerStats.keys++;
+            _playerStats.CollectKey();
             Destroy(col.gameObject);
         }
     }

@@ -9,7 +9,7 @@ namespace BubbleNS
     {
         public PlayerStats playerstats;
 
-        public Image barraDeoxigeno;
+        public Image barraDeoxigeno;    //TO DO: Remove this and all of its references
 
         public float movingSpeed;
         public float jumpForce;
@@ -157,8 +157,8 @@ namespace BubbleNS
             _firing = true;
             _fireWaitingTime = firingDelayPerIntensity[CalcIntensity()];
             SpawnBubbles();
-            
-            playerstats.oxigin = Mathf.Clamp(playerstats.oxigin - fireCost, 1, 100);
+
+            playerstats.ModifyOxygen(-fireCost);
             
             if (barraDeoxigeno != null)
                 barraDeoxigeno.fillAmount -= fireCost / 100f;
@@ -189,9 +189,10 @@ namespace BubbleNS
         {
             rigidbody.AddForce(new Vector2((facingRight ? 1 : -1) * dashForce, 0), ForceMode2D.Impulse);
             rigidbody.drag = dashingDrag;
-            playerstats.oxigin = playerstats.oxigin - dashCost;
+            playerstats.ModifyOxygen(-dashCost);
             if(barraDeoxigeno!=null)
                 barraDeoxigeno.fillAmount -= dashCost/100f;
+
             _dashing = true;
         }
 
@@ -267,13 +268,12 @@ namespace BubbleNS
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Bubble")
+            if (other.gameObject.CompareTag("Bubble"))
             {
                 var lootBubble = other.GetComponentInParent<LootBubble>();
-                playerstats.oxigin += lootBubble.oxigenProvided;
+                playerstats.ModifyOxygen(lootBubble.oxigenProvided);
+                barraDeoxigeno.fillAmount += lootBubble.oxigenProvided / 100f;
                 Destroy(other.gameObject);
-                barraDeoxigeno.fillAmount += lootBubble.oxigenProvided/100f;
-
             }
         }
     }

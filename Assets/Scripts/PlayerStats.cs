@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class PlayerStats : MonoBehaviour
     public bool IsDead { get; private set; }
 
     public int oxigin = 100;
+    [SerializeField]
+    private int maxOxygen = 100;
 
     public Image casco;
     public Sprite[] cascoEstados;
@@ -24,6 +27,9 @@ public class PlayerStats : MonoBehaviour
     public int keys;
 
     public float Health => health;
+
+    public static event Action<float> OnOxygenChanged;
+    public static event Action<int> OnKeysChanged;
 
     public void TakeDamage(float enemyDamage)
     {
@@ -46,6 +52,16 @@ public class PlayerStats : MonoBehaviour
         casco.sprite = cascoEstados[stateIndex];
     }
 }
+
+    public void ModifyOxygen(int oxygenGain) {
+        oxigin = Mathf.Clamp(oxigin + oxygenGain, 1, maxOxygen);
+        float newOxygenPercentage = (float)oxigin / maxOxygen;
+        OnOxygenChanged?.Invoke(newOxygenPercentage);
+    }
+
+    public void CollectKey() {
+        OnKeysChanged?.Invoke(++keys);
+    }
 
 }
 
