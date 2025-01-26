@@ -303,7 +303,8 @@ MonoBehaviour:
   life: 100
   maxLife: 100
   damage: 10
-  oxigin: 100
+  oxigin: 1
+  maxOxygen: 100
   casco: {fileID: 0}
   cascoEstados:
   - {fileID: 1166928265, guid: 34187e764aaf2d9408002efc51e32c05, type: 3}

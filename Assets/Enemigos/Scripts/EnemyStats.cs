@@ -10,6 +10,9 @@ public class EnemyStats : MonoBehaviour
     public float health = 100f;  // Salud inicial del enemigo
     public float damage = 10f;   // Daño que el enemigo causa
     public float destructionDelay = 0.5f; // Tiempo antes de destruir el objeto tras morir (opcional, para animaciones o efectos)
+    public float damageForce = 5;
+    public float receiveDamageDuration = 0.8f;
+    public bool selfDestroyOnImpact = false;
     public SpriteRenderer enemySprite;
     public SpriteRenderer bubbledSprite;
     public BubbledConfiguration bubbledConfig;
@@ -56,13 +59,18 @@ public class EnemyStats : MonoBehaviour
             Debug.Log("El enemigo ha recibido " + damageAmount + " de daño. Salud restante: " + health);
             if(health<=0)
             {
-                isDead = true;
-                _collider2D.enabled = false;
-                _timeToDissappearLeft = bubbledConfig.timeToDissappear;
-                enemySprite.enabled = false;
-                OnDead?.Invoke();
+                Die();
             }
         }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        _collider2D.enabled = false;
+        _timeToDissappearLeft = bubbledConfig.timeToDissappear;
+        enemySprite.enabled = false;
+        OnDead?.Invoke();
     }
 
 
@@ -91,5 +99,10 @@ public class EnemyStats : MonoBehaviour
     }
 
     public bool IsBubbled => health / _maxHealth < 1;
+
+    public void SelfDestroy()
+    {
+        Die();
+    }
 }
 

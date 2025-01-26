@@ -28,6 +28,12 @@ public class UIManager : MonoBehaviour
         PlayerStats.OnKeysChanged -= UpdateKeys;
     }
 
+    private void Start()
+    {
+        UpdateOxygen(0);
+        UpdateKeys(0);
+    }
+
     private void UpdateOxygen(float newOxygenPercentage)
     {
         _fishFace.localScale = (_fishFaceBaseScale + newOxygenPercentage * _fishFaceMaxScaleIncrease) * Vector3.one;
