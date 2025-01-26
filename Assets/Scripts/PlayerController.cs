@@ -1,12 +1,9 @@
-    using System;
-    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-    using UnityEngine.Serialization;
 
-    namespace BubbleNS
+namespace BubbleNS
 {
     public class PlayerController : MonoBehaviour
     {
@@ -37,9 +34,9 @@ using UnityEngine.UI;
         public Transform groundCheck;
         public float fallingGravity = 0.5f;
         public float dashingDrag = 5;
-        public float firingDelay = 3;
+        public List<float> firingDelayPerIntensity = new(){0.5f,0.25f};
         public Vector2 verticalSpeedLimits = new Vector2(-10, 10);
-        [FormerlySerializedAs("bubble")] public FireBubble fireBubble;
+        public List<FireBubble> fireBubbles;
         public Transform bubbleSpawnPosition;
 
         private Rigidbody2D rigidbody;
@@ -138,7 +135,7 @@ using UnityEngine.UI;
 
         private bool CanFire()
         {
-            return _fire.IsPressed() && !_firing && _fireWaitingTime <= 0 && playerstats.oxigin >= fireCost;
+            return _fire.IsPressed() && !_firing && _fireWaitingTime <= 0;
         }
 
         private void CheckFiringDelay()
@@ -158,22 +155,30 @@ using UnityEngine.UI;
         {
 
             _firing = true;
-            _fireWaitingTime = firingDelay;
+            _fireWaitingTime = firingDelayPerIntensity[CalcIntensity()];
             SpawnBubbles();
             
-            playerstats.oxigin = playerstats.oxigin - fireCost;
-        
-        
-        if (barraDeoxigeno != null)
-            barraDeoxigeno.fillAmount -= fireCost / 100f;
+            playerstats.oxigin = Mathf.Clamp(playerstats.oxigin - fireCost, 1, 100);
+            
+            if (barraDeoxigeno != null)
+                barraDeoxigeno.fillAmount -= fireCost / 100f;
         }
 
+        private int _bubbleIndex;
         private void SpawnBubbles()
         {
-            
-            var bubbleSpawned = Instantiate(fireBubble, bubbleSpawnPosition.position, Quaternion.identity);
-            bubbleSpawned.Initialize(facingRight);
+            var bubbleSpawned = Instantiate(GetNextBubble(), bubbleSpawnPosition.position, Quaternion.identity);
+            bubbleSpawned.Initialize(facingRight, CalcIntensity());
         }
+
+        private FireBubble GetNextBubble()
+        {
+            var index = _bubbleIndex;
+            _bubbleIndex = (_bubbleIndex + 1) % fireBubbles.Count;
+            return fireBubbles[index];
+        }
+
+        private int CalcIntensity() => playerstats.oxigin/100f>0.3f?1:0;
 
         private bool IsDashingFinishing()
         {

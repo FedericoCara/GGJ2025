@@ -18,7 +18,8 @@ namespace BubbleNS
         public void Initialize(bool right, int intensity = 0)
         {
             _rigidBody.AddForce((right? Vector2.right : Vector2.left)
-                                * -GetIntensityForce(0)+Vector2.down,
+                                * - GetIntensityForce(intensity)
+                                +(intensity==0? Vector2.down : Vector2.zero),
                 ForceMode2D.Impulse);
             if (intensity > 0)
             {
@@ -42,6 +43,8 @@ namespace BubbleNS
             if((enemy = col.collider.GetComponent<EnemyStats>())!=null){
                 enemy.TakeDamage(damage);
             }
+            if(col.collider.tag=="Player")
+                return;
             Destroy(gameObject);
             
         }
