@@ -19,6 +19,8 @@ using UnityEngine.UI;
         public int dashForce;
         public float dashingStopSpeed = 0.2f;
         public int dashCost = 10;
+
+        public int fireCost = 5;
         public int damageForce = 5;
         public float receiveDamageDuration = 0.5f;
         private float moveInput;
@@ -136,7 +138,7 @@ using UnityEngine.UI;
 
         private bool CanFire()
         {
-            return _fire.IsPressed() && !_firing && _fireWaitingTime <= 0;
+            return _fire.IsPressed() && !_firing && _fireWaitingTime <= 0 && playerstats.oxigin >= fireCost;
         }
 
         private void CheckFiringDelay()
@@ -154,13 +156,21 @@ using UnityEngine.UI;
 
         private void FireBubbles()
         {
+
             _firing = true;
             _fireWaitingTime = firingDelay;
             SpawnBubbles();
+            
+            playerstats.oxigin = playerstats.oxigin - fireCost;
+        
+        
+        if (barraDeoxigeno != null)
+            barraDeoxigeno.fillAmount -= fireCost / 100f;
         }
 
         private void SpawnBubbles()
         {
+            
             var bubbleSpawned = Instantiate(fireBubble, bubbleSpawnPosition.position, Quaternion.identity);
             bubbleSpawned.Initialize(facingRight);
         }
@@ -255,6 +265,8 @@ using UnityEngine.UI;
                 var lootBubble = other.GetComponentInParent<LootBubble>();
                 playerstats.oxigin += lootBubble.oxigenProvided;
                 Destroy(other.gameObject);
+                barraDeoxigeno.fillAmount += lootBubble.oxigenProvided/100f;
+
             }
         }
     }
