@@ -14,9 +14,9 @@ public class PlayerStats : MonoBehaviour
     public bool IsDead { get; private set; }
 
     public int oxigin = 100;
-    public Sprite[] cascoEstados;
 
-    public SpriteRenderer casco;
+    public Image casco;
+    public Sprite[] cascoEstados;
 
     [SerializeField]
     private float health = 100f;

@@ -298,12 +298,12 @@ MonoBehaviour:
   maxLife: 100
   damage: 10
   oxigin: 100
-  cascoEstados:
-  - {fileID: 779616697, guid: 4e35d43243133f14b868434da90017cd, type: 3}
-  - {fileID: -1965019113, guid: 4e35d43243133f14b868434da90017cd, type: 3}
-  - {fileID: 829179575, guid: 4e35d43243133f14b868434da90017cd, type: 3}
-  - {fileID: -1956501840, guid: 4e35d43243133f14b868434da90017cd, type: 3}
   casco: {fileID: 0}
+  cascoEstados:
+  - {fileID: 1166928265, guid: 34187e764aaf2d9408002efc51e32c05, type: 3}
+  - {fileID: -470163314, guid: 34187e764aaf2d9408002efc51e32c05, type: 3}
+  - {fileID: -551049808, guid: 34187e764aaf2d9408002efc51e32c05, type: 3}
+  - {fileID: 300230565, guid: 34187e764aaf2d9408002efc51e32c05, type: 3}
   health: 100
   keys: 0
 --- !u!114 &1867929972070704910
