@@ -28,7 +28,12 @@ namespace BubbleNS
 
         private void RestartLevelDelayed()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("GameOver");
+        }
+
+        public void ShowVictory()
+        {
+            SceneManager.LoadScene("Victory");
         }
     }
 }

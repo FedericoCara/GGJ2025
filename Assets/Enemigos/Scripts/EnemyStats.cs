@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BubbleNS;
 using Enemigos.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,7 +18,8 @@ public class EnemyStats : MonoBehaviour
     public SpriteRenderer bubbledSprite;
     public BubbledConfiguration bubbledConfig;
     public event Action OnDead;
-
+    public bool isTheBoss;
+    
     private bool isDead;
     private Collider2D _collider2D;
     private Animator _animator;
@@ -70,6 +72,8 @@ public class EnemyStats : MonoBehaviour
         _collider2D.enabled = false;
         _timeToDissappearLeft = bubbledConfig.timeToDissappear;
         enemySprite.enabled = false;
+        if (isTheBoss)
+            GameManager.Instance.ShowVictory();
         OnDead?.Invoke();
     }
 

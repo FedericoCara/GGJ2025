@@ -241,9 +241,7 @@ MonoBehaviour:
   dashForce: 30
   dashingStopSpeed: 3
   dashCost: 10
-  fireCost: 5
-  damageForce: 5
-  receiveDamageDuration: 0.8
+  fireCost: 1
   deathState: 0
   groundCheck: {fileID: 6952628394686255622}
   fallingGravity: 0.5

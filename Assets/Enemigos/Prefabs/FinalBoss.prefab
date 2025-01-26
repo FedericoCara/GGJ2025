@@ -252,8 +252,8 @@ GameObject:
   - component: {fileID: 1060025797816351446}
   - component: {fileID: 1572645851735488217}
   - component: {fileID: 5117592156259763599}
-  - component: {fileID: 2369759783002970004}
   - component: {fileID: 6894640236950038799}
+  - component: {fileID: 2369759783002970004}
   - component: {fileID: 4706242331894654078}
   - component: {fileID: 3252148095760072990}
   - component: {fileID: 7255588516845564756}
@@ -412,6 +412,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6894640236950038799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093214141935936419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a3184f027eec74785b560c167d31e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000
+  damage: 35
+  destructionDelay: 0.5
+  damageForce: 5
+  receiveDamageDuration: 0.8
+  selfDestroyOnImpact: 0
+  enemySprite: {fileID: 1060025797816351446}
+  bubbledSprite: {fileID: 2011845866347924377}
+  bubbledConfig: {fileID: 11400000, guid: a19acd06af33e418cbb83daa647b877c, type: 2}
+  isTheBoss: 0
 --- !u!114 &2369759783002970004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,27 +453,6 @@ MonoBehaviour:
   projectileLifetime: 3
   offset: 0
   direction: {x: -1, y: 1}
---- !u!114 &6894640236950038799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093214141935936419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2a3184f027eec74785b560c167d31e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 500
-  damage: 35
-  destructionDelay: 0.5
-  damageForce: 5
-  receiveDamageDuration: 0.8
-  selfDestroyOnImpact: 0
-  enemySprite: {fileID: 1060025797816351446}
-  bubbledSprite: {fileID: 2011845866347924377}
-  bubbledConfig: {fileID: 11400000, guid: a19acd06af33e418cbb83daa647b877c, type: 2}
 --- !u!114 &4706242331894654078
 MonoBehaviour:
   m_ObjectHideFlags: 0
