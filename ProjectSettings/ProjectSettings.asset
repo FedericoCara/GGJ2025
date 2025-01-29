@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Global Game Jam 2025
+  companyName: Dinamita
+  productName: Magic Bubble Girl
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -141,7 +141,8 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -944628639613478452, guid: f6b4cbcc6c94c48cabb431a6b389e30d, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -802,11 +803,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 1af7e1ff-d8e4-4cad-99f5-6ee2b8df7c35
+  cloudProjectId: 48acf4b1-cbe3-4ea9-b6ba-092c14bab50f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Global Game Jam 2025
-  organizationId: unity_3jiiu8yq8jmfjq
+  organizationId: federico-587479
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

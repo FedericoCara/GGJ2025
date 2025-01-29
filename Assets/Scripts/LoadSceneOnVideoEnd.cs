@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
@@ -5,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class LoadSceneOnVideoEnd : MonoBehaviour
 {
     public VideoPlayer videoPlayer;  // Referencia al VideoPlayer
+    public string videoName;
     public string sceneToLoad;       // El nombre de la escena a cargar
+    private bool _videoStarted;
+    private bool _initialized;
 
     void Start()
     {
@@ -14,6 +18,11 @@ public class LoadSceneOnVideoEnd : MonoBehaviour
         {
             // Suscribirse al evento que se llama cuando el video termina
             videoPlayer.loopPointReached += OnVideoEnd;
+            var videoPath = System.IO.Path.Combine(Application.streamingAssetsPath,videoName);
+            Debug.Log(videoPath);
+            videoPlayer.url = videoPath;
+            _initialized = true;
+            Invoke(nameof(PlayVideo),2f);
         }
         else
         {
@@ -42,5 +51,18 @@ public class LoadSceneOnVideoEnd : MonoBehaviour
         {
             videoPlayer.loopPointReached -= OnVideoEnd;
         }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        PlayVideo();
+    }
+
+    private void PlayVideo()
+    {
+        if(_videoStarted || !_initialized)
+            return;
+        _videoStarted = true;
+        videoPlayer.Play();
     }
 }
